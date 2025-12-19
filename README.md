@@ -97,6 +97,46 @@ Deployment
 
 Systems thinking
 
+Folder Structure & Purpose
+
+app/main.py
+Orchestrates the application: initializes the FastAPI app, defines API routes, and connects preprocessing, inference, and control logic.
+
+app/models/
+Defines and loads machine learning models, including the from-scratch neural network and the CNN.
+
+app/preprocessing/
+Handles input preparation and sensor simulation, including image normalization, resizing, and noise injection.
+
+app/inference/
+Runs model inference, selects the appropriate model, and measures inference latency.
+
+app/control/
+Implements decision logic based on model outputs, serving as a stub for robotics-style perception-to-action pipelines.
+
+Logging Strategy
+
+The system logs operational signals for debugging and performance monitoring.
+
+Log the model used for inference (cnn or nn)
+
+Log inference latency (milliseconds)
+
+Log input validation errors and inference failures
+
+Logs are written to standard output for visibility in local runs and deployed environments.
+
+Error Categories
+
+Input Validation Errors (Client Errors)
+Invalid or malformed inputs such as non-image files, incorrect shapes, or unsupported formats. Returned as HTTP 400 or 422.
+
+Model / Inference Errors (System Errors)
+Failures during model loading or inference, such as missing weights or runtime errors. Returned as HTTP 500 and logged internally.
+
+Unexpected Exceptions (Fail-Safe Errors)
+Unhandled edge cases or bugs. The service returns HTTP 500 while logging diagnostic information without crashing.
+
 ## Future Extensions (Robotics-Oriented)
 - TODO: continuous image stream ingestion
 - TODO: temporal smoothing across frames
