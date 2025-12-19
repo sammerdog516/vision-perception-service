@@ -96,3 +96,9 @@ Production backend
 Deployment
 
 Systems thinking
+
+## Future Extensions (Robotics-Oriented)
+- TODO: continuous image stream ingestion
+- TODO: temporal smoothing across frames
+- TODO: decision thresholds based on confidence
+- TODO: integrate with real camera hardware
