@@ -137,6 +137,10 @@ Failures during model loading or inference, such as missing weights or runtime e
 Unexpected Exceptions (Fail-Safe Errors)
 Unhandled edge cases or bugs. The service returns HTTP 500 while logging diagnostic information without crashing.
 
+## Baseline Model
+A fully connected neural network implemented from scratch to establish a learning baseline.  
+Achieves ~97% accuracy on MNIST and highlights the limitations of non-convolutional architectures for vision tasks.
+
 ## Future Extensions (Robotics-Oriented)
 - TODO: continuous image stream ingestion
 - TODO: temporal smoothing across frames
