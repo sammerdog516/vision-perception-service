@@ -1,6 +1,4 @@
 HEAD
-## Baseline Performance
-The from-scratch fully connected neural network achieves approximately 97.13% accuracy on MNIST, serving as a baseline for comparison against convolutional architectures.
 
 # vision-perception-service
 Problem
@@ -141,9 +139,24 @@ Failures during model loading or inference, such as missing weights or runtime e
 Unexpected Exceptions (Fail-Safe Errors)
 Unhandled edge cases or bugs. The service returns HTTP 500 while logging diagnostic information without crashing.
 
-## Baseline Model
-A fully connected neural network implemented from scratch to establish a learning baseline.  
-Achieves ~97% accuracy on MNIST and highlights the limitations of non-convolutional architectures for vision tasks.
+## Baseline (Fully Connected NN)
+- From-scratch FC network on MNIST
+- Test accuracy: 97.13%
+
+## CNN Model
+- Architecture: Conv(1→32,3x3) → ReLU → MaxPool(2)
+              → Conv(32→64,3x3) → ReLU → MaxPool(2)
+              → FC(64*5*5 → 10)
+- Clean test accuracy: ~99.0%
+- Robustness:
+  - Gaussian noise (std=0.3): ~98–99%
+  - Gaussian noise + 2px translation: ~95–97%
+
+## Design Rationale
+- Inductive bias: CNNs exploit spatial locality + weight sharing; FC baselines treat pixels independently.
+- Robustness: pooling and convolution yield tolerance to local perturbations (sensor noise, small shifts).
+- Perception framing: exposed as a robotics-style module:
+  `sensor → preprocess → infer → decision` with confidence output for downstream control.
 
 ## Future Extensions (Robotics-Oriented)
 - TODO: continuous image stream ingestion
