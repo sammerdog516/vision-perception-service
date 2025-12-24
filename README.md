@@ -48,9 +48,9 @@ Uvicorn
 
 Infrastructure
 
-Docker
+Docker(planned)
 
-Railway / Fly.io (deployment)
+Railway / Fly.io (planned)
 
 Data
 
@@ -116,6 +116,8 @@ Runs model inference, selects the appropriate model, and measures inference late
 app/control/
 Implements decision logic based on model outputs, serving as a stub for robotics-style perception-to-action pipelines.
 
+Some modules are consolidated for simplicity in the current prototype
+
 Logging Strategy
 
 The system logs operational signals for debugging and performance monitoring.
@@ -157,6 +159,11 @@ Unhandled edge cases or bugs. The service returns HTTP 500 while logging diagnos
 - Robustness: pooling and convolution yield tolerance to local perturbations (sensor noise, small shifts).
 - Perception framing: exposed as a robotics-style module:
   `sensor → preprocess → infer → decision` with confidence output for downstream control.
+
+## Running Locally
+1. Train model: `python scripts/train_cnn.py`
+2. Start API: `uvicorn app.main:app --reload`
+3. Test client: `python scripts/call_api.py`
 
 ## Future Extensions (Robotics-Oriented)
 - TODO: continuous image stream ingestion
