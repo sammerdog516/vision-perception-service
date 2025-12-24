@@ -21,15 +21,13 @@ def preprocess(image):
     image: (28, 28) array-like (0-255 uint8 or 0-1 float)
     returns: (1, 1, 28, 28) float tensor
     """
-    if torch.is_tensor(image):
-        x = image.float()
+    if isinstance(image, list):
+        image = np.array(image, dtype=np.float32)
 
-    else:
-        x = _preprocess(image)
-        
-    if x.ndim == 2:
-        x = x.unsqueeze(0) # (1, 28, 28)
-    
+    if torch.is_tensor(image):
+        image = image.cpu().numpy()
+
+    x = _preprocess(image)
     return x.unsqueeze(0)   # batch dim
 
 def infer(model: torch.nn.Module, x: torch.Tensor, device: torch.device) -> torch.Tensor:
